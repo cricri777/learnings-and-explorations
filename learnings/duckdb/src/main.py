@@ -1,20 +1,20 @@
 import duckdb
 
-
 def run():
-    conn = duckdb.connect()
-    results = conn.execute("""
+    duckdb.sql("""
         SELECT
-            COUNT(*)
+            *
         FROM read_csv('resources/billionaires.csv', 
         header=True,
         AUTO_DETECT=TRUE,
-        dateformat='%d-%m-%Y', filename=True);
-        
-    """).fetchall()
+        dateformat='%d-%m-%Y', filename=True)
+        LIMIT 100;
+    """).show()
 
-    print(results)
-
+    conn = duckdb.connect()
+    conn.execute("""
+    
+    """).df()
 
 if __name__ == '__main__':
     run()
